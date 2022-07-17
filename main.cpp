@@ -27,10 +27,18 @@ public:
         cout << this->name.c_str() << " by " << this->author.c_str();
     }
 
-
 };
 
 class Shelf {
+private:
+    int get_book_index(Book book){
+        auto it = find(this->shelf.begin(), this->shelf.end(), book);
+
+        if(it != this->shelf.end()){
+            return it - this->shelf.begin();
+        }
+        return -1;
+    }
 public:
     vector<Book> shelf = {Book("Book 1", "God"), Book("Book2", "Tw")};
 
@@ -42,8 +50,19 @@ public:
 
     void show_book(){
         for (int i=0; i<this->shelf.size();i++){
-            cout << "Book NO." << i+1 << "). " << this->shelf[i].info() << endl;
+            cout << "Book NO." << i+1 << "). ";
+            this->shelf[i].info();
+            cout << endl;
         }
+    }
+
+    void add_book(Book new_book){
+        this->shelf.push_back(new_book);
+    }
+
+    void remove_book(Book book){
+        int ind;
+        this->shelf.erase(this->shelf.begin());
     }
 
 
