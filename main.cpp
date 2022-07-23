@@ -30,15 +30,7 @@ public:
 };
 
 class Shelf {
-private:
-    int get_book_index(Book book){
-        auto it = find(this->shelf.begin(), this->shelf.end(), book);
 
-        if(it != this->shelf.end()){
-            return it - this->shelf.begin();
-        }
-        return -1;
-    }
 public:
     vector<Book> shelf = {Book("Book 1", "God"), Book("Book2", "Tw")};
 
@@ -46,6 +38,17 @@ public:
 
     Shelf(vector<Book> shelf){
         this->shelf = shelf;
+    }
+
+    int get_book_index(Book book){
+        for(int i=0;i<this->shelf.size();i++){
+            
+            if (&this->shelf[i] == &book){ //check if equal by pointer
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     void show_book(){
@@ -73,5 +76,7 @@ int main(){
 
     Shelf shelf1 = Shelf();
     shelf1.show_book();
+
+    cout << shelf1.get_book_index(something);
 
 }
